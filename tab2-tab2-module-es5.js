@@ -1,3 +1,7 @@
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["tab2-tab2-module"], {
@@ -17,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n\r\n\r\n  <div class=\"map\">\r\n    <ion-button class=\"map_button\" color=\"primary\">Maps</ion-button>\r\n  </div>\r\n  <ion-card>\r\n    <ion-card-header>\r\n      <ion-card-subtitle>Grocery items</ion-card-subtitle>\r\n      <ion-card-title>Cheese</ion-card-title>\r\n    </ion-card-header>\r\n  \r\n    <ion-card-content>\r\n      - Cheese $5\r\n    </ion-card-content>\r\n  </ion-card>  \r\n  \r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n<br>\r\n<br>\r\n\r\n\r\n    \r\n  <ion-list ng-cloak>\r\n    <ion-item-sliding *ngFor=\"let item of shoppingList\">\r\n      <ion-item>\r\n        <ion-card>\r\n          <ion-label>{{item.itemName}}</ion-label>\r\n          <ion-label>{{item.store}}</ion-label>\r\n          <ion-checkbox></ion-checkbox>\r\n        </ion-card>\r\n      </ion-item>\r\n    </ion-item-sliding>\r\n\r\n  </ion-list>\r\n\r\n<ion-card>\r\n  <ion-button (click)=\"generateMap()\">\r\n    <ion-icon name=\"logo-buffer\"></ion-icon>\r\n    </ion-button>\r\n</ion-card>\r\n\r\n\r\n \r\n  \r\n</ion-content>\r\n";
     /***/
   },
 
@@ -148,11 +152,83 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
 
-    var Tab2Page = function Tab2Page() {
-      _classCallCheck(this, Tab2Page);
+
+    var _services_search_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../services/search.service */
+    "./src/app/services/search.service.ts");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _tab3_tab3_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../tab3/tab3.page */
+    "./src/app/tab3/tab3.page.ts");
+
+    var Tab2Page =
+    /*#__PURE__*/
+    function () {
+      function Tab2Page(searchService, router) {
+        _classCallCheck(this, Tab2Page);
+
+        this.searchService = searchService;
+        this.router = router;
+        this.shoppingList = [];
+      }
+
+      _createClass(Tab2Page, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          this.shoppingList = this.searchService.shoppingList;
+        }
+      }, {
+        key: "generateMap",
+        value: function generateMap() {
+          var _this = this;
+
+          this.shoppingList.forEach(function (element) {
+            _this.searchService.getNearStore(element.store).subscribe(function (response) {
+              console.log(response);
+
+              _this.searchService.locations.push({
+                location: response
+              });
+            });
+          });
+          console.log(this.searchService.locations);
+          this.router.navigateByUrl('tabs/tabs/tab3');
+        }
+      }]);
+
+      return Tab2Page;
+    }();
+
+    Tab2Page.ctorParameters = function () {
+      return [{
+        type: _services_search_service__WEBPACK_IMPORTED_MODULE_2__["SearchService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }];
     };
 
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonReorderGroup"], {
+      static: true
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonReorderGroup"])], Tab2Page.prototype, "reorderGroup", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_tab3_tab3_page__WEBPACK_IMPORTED_MODULE_5__["Tab3Page"], {
+      static: false
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _tab3_tab3_page__WEBPACK_IMPORTED_MODULE_5__["Tab3Page"])], Tab2Page.prototype, "tab3", void 0);
     Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-tab2',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -161,7 +237,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./tab2.page.scss */
       "./src/app/tab2/tab2.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])], Tab2Page);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_search_service__WEBPACK_IMPORTED_MODULE_2__["SearchService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])], Tab2Page);
     /***/
   }
 }]);

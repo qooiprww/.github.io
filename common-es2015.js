@@ -634,6 +634,258 @@ const openURL = async (url, ev, direction) => {
 
 
 
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/tab3/tab3.page.html":
+/*!***************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/tab3/tab3.page.html ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n  </ion-toolbar>\n</ion-header>\n<ion-content [fullscreen]=\"true\">\n\n\n  <!-- <form [formGroup]=\"directionForm\" (ngSubmit)=\"calculateAndDisplayRoute(directionForm.value)\">\n    <ion-item>\n      <ion-label position=\"floating\">Source</ion-label>\n      <ion-input formControlName=\"source\"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label position=\"floating\">Destination</ion-label>\n      <ion-input formControlName=\"destination\"></ion-input>\n    </ion-item>\n    <ion-button expand=\"full\" type=\"submit\" [disabled]=\"directionForm.invalid\">Get Direction</ion-button>\n  </form> -->\n  <div #mapContainer id=\"map\"></div>\n  <ion-fab vertical=\"center\" horizontal=\"start\" slot=\"fixed\">\n    <ion-fab-button href=\"navigationLink\">\n      <ion-icon name=\"share\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button (click)=\"calculateAndDisplayRoute()\">\n      <ion-icon name=\"arrow-forward-circle\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>");
+
+/***/ }),
+
+/***/ "./src/app/services/search.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/services/search.service.ts ***!
+  \********************************************/
+/*! exports provided: SearchService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchService", function() { return SearchService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var src_app_services_httpclient_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/httpclient.service */ "./src/app/services/httpclient.service.ts");
+
+
+
+let SearchService = class SearchService {
+    constructor(http) {
+        this.http = http;
+        this.shoppingList = [{
+                itemName: 'i9-9900k',
+                store: 'Canada Computers',
+                price: 800,
+                description: 'cpu',
+            },
+            {
+                itemName: 'RTX 2080ti',
+                store: 'Best Buy',
+                price: 1300,
+                decription: 'gpu',
+            },
+            {
+                itemName: 'GTX 1660',
+                store: 'Canada Computers',
+                price: 350,
+                description: 'gpu',
+            },
+            {
+                itemName: 'G-Skill Ripjaws 16gb 3200mHz kit',
+                store: 'Best Buy',
+                price: 72,
+                description: 'memory',
+            },
+            {
+                itemName: 'Deepcool Matrexx 50 rgb',
+                store: 'Canada Computers',
+                price: 85,
+                description: 'computer case',
+            },
+            {
+                itemName: '512gb ssd',
+                store: 'Canada Comptuers',
+                price: 92,
+                description: 'Storage',
+            },
+            {
+                itemName: '256gb ssd',
+                store: 'Best Buy',
+                price: 40,
+                description: 'Storage',
+            },
+            {
+                itemName: 'Ryzen 5 3600',
+                store: 'Canada Computers',
+                price: 240,
+                description: 'cpu',
+            },
+            {
+                itemName: 'Ryzen 7 3700x',
+                store: 'Best Buy',
+                price: 450,
+                description: 'cpu'
+            },
+            {
+                itemName: '1tb WD blue hdd',
+                store: 'Best Buy',
+                price: 50,
+                description: 'storage',
+            },
+            {
+                itemName: 'NZXT H500i',
+                store: 'Canada Comptuters',
+                price: 100,
+                description: 'computer case',
+            }];
+        this.locations = [];
+        this.isOK = false;
+    }
+    searchItems(value) {
+        const body = {
+            name: value
+        };
+        return this.http.dashPost('search/', JSON.stringify(body));
+    }
+    getAll() {
+        return this.http.dashGet('getlist/');
+    }
+    getNearStore(name) {
+        const path = 'place/findplacefromtext/json?input=';
+        return this.http.mapGet(path + name + '&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=');
+    }
+};
+SearchService.ctorParameters = () => [
+    { type: src_app_services_httpclient_service__WEBPACK_IMPORTED_MODULE_2__["HttpclientService"] }
+];
+SearchService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_httpclient_service__WEBPACK_IMPORTED_MODULE_2__["HttpclientService"]])
+], SearchService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/tab3/tab3.page.scss":
+/*!*************************************!*\
+  !*** ./src/app/tab3/tab3.page.scss ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("ion-content ion-toolbar {\n  --background: translucent;\n}\n\n#map {\n  height: 100%;\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhYjMvQzpcXFVzZXJzXFxXdUhhb1xcT25lRHJpdmVcXOaWh+aho1xcR2l0SHViXFxTaG9wcHJlc3NvXFxmcm9udGVuZFxcc3JjXFxhcHAvdGFiM1xcdGFiMy5wYWdlLnNjc3MiLCJ0YWIzL3RhYjMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UseUJBQUE7QUNDRjs7QURFQTtFQUNFLFlBQUE7RUFDQSxXQUFBO0FDQ0YiLCJmaWxlIjoidGFiMy90YWIzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50IGlvbi10b29sYmFyIHtcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc2x1Y2VudDtcbn1cblxuI21hcCB7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG4gfSIsImlvbi1jb250ZW50IGlvbi10b29sYmFyIHtcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc2x1Y2VudDtcbn1cblxuI21hcCB7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG59Il19 */");
+
+/***/ }),
+
+/***/ "./src/app/tab3/tab3.page.ts":
+/*!***********************************!*\
+  !*** ./src/app/tab3/tab3.page.ts ***!
+  \***********************************/
+/*! exports provided: Tab3Page */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tab3Page", function() { return Tab3Page; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_search_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/search.service */ "./src/app/services/search.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _services_httpclient_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/httpclient.service */ "./src/app/services/httpclient.service.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+
+
+
+
+
+
+let Tab3Page = class Tab3Page {
+    constructor(fb, searchService, userService, http) {
+        this.fb = fb;
+        this.searchService = searchService;
+        this.userService = userService;
+        this.http = http;
+        this.directionsService = new google.maps.DirectionsService();
+        this.directionsDisplay = new google.maps.DirectionsRenderer();
+        this.wayPointsLink = '';
+        this.locations = [];
+        this.locations = this.searchService.locations;
+        console.log(this.searchService.locations);
+    }
+    // createDirectionForm() {
+    //   this.directionForm = this.fb.group({
+    //     source: ['Markham', Validators.required],
+    //     destination: ['Toronto', Validators.required]
+    //   });
+    // }
+    ngAfterViewInit() {
+        const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+            zoom: 7,
+            center: { lat: 41.85, lng: -87.65 }
+        });
+        this.directionsDisplay.setMap(map);
+        if (this.searchService.isOK) {
+            this.calculateAndDisplayRoute();
+        }
+    }
+    calculateAndDisplayRoute() {
+        const that = this;
+        const wayPoints = [];
+        this.searchService.locations.forEach(item => {
+            wayPoints.push({ location: item.location.candidates[0].formatted_address });
+        });
+        this.directionsService.route({
+            // origin: formValues.source,
+            // destination: formValues.destination,
+            origin: this.searchService.locations[0].location.candidates[0].formatted_address,
+            destination: this.searchService.locations[this.locations.length - 1].location.candidates[0].formatted_address,
+            waypoints: wayPoints,
+            travelMode: google.maps.TravelMode.DRIVING
+        }, (response, status) => {
+            console.log(response);
+            console.log(status);
+            console.log(wayPoints);
+            wayPoints.forEach(point => {
+                this.wayPointsLink += (point.location + '%7C');
+            });
+            console.log(this.wayPointsLink);
+            if (status === 'OK') {
+                that.directionsDisplay.setDirections(response);
+                this.navigationLink = 'https://www.google.com/maps/dir/?api=1&origin=' + this.locations[0].location +
+                    '&destination=' + this.locations[this.locations.length - 1].location +
+                    '&travelmode=driving' +
+                    '&waypoints=' + this.wayPointsLink.replace(/\s/g, '+');
+                this.navigationLink = this.navigationLink.slice(0, -3).replace(/\s/g, '+');
+                console.log(this.navigationLink);
+            }
+            else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+};
+Tab3Page.ctorParameters = () => [
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"] },
+    { type: _services_search_service__WEBPACK_IMPORTED_MODULE_2__["SearchService"] },
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
+    { type: _services_httpclient_service__WEBPACK_IMPORTED_MODULE_4__["HttpclientService"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mapContainer', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], Tab3Page.prototype, "mapNativeElement", void 0);
+Tab3Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-tab3',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./tab3.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/tab3/tab3.page.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./tab3.page.scss */ "./src/app/tab3/tab3.page.scss")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"], _services_search_service__WEBPACK_IMPORTED_MODULE_2__["SearchService"], _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"], _services_httpclient_service__WEBPACK_IMPORTED_MODULE_4__["HttpclientService"]])
+], Tab3Page);
+
+
+
 /***/ })
 
 }]);

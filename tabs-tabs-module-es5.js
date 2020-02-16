@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header >\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button (click)=\"openMenu()\"></ion-menu-button>\n    </ion-buttons>\n    <ion-title>{{title}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\">\n    <ion-tab-button tab=\"tab1\" (click)=\"updateTitle('Search')\">\n      <ion-icon name=\"triangle\"></ion-icon>\n      <ion-label>Tab 1</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\" (click)=\"updateTitle('Shopping List')\">\n      <ion-icon name=\"ellipse\"></ion-icon>\n      <ion-label>Tab 2</ion-label>\n    </ion-tab-button>\n    <ion-tab-button tab=\"tab3\">\n      <ion-icon name=\"map\" (click)=\"updateTitle('Map')\"></ion-icon>\n      <ion-label>Map</ion-label>\n    </ion-tab-button>\n\n  </ion-tab-bar>\n\n</ion-tabs>\n";
+    __webpack_exports__["default"] = "<ion-item lines=\"none\">\r\n  <ion-buttons slot=\"start\">\r\n    <ion-menu-button color=\"dark\" menu=\"sidePanel\"></ion-menu-button>\r\n  </ion-buttons>\r\n  <ion-searchbar animated type=\"text\" debounce=\"500\" (ionInput)=\"getItems($event)\"></ion-searchbar>\r\n</ion-item>\r\n<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\" color=\"dark\">\r\n    <ion-tab-button tab=\"tab1\" (click)=\" updateTitle('Search')\">\r\n      <ion-icon name=\"triangle\"></ion-icon>\r\n      <ion-label>Tab 1</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab2\" (click)=\"updateTitle('Shopping List')\">\r\n      <ion-icon name=\"ellipse\"></ion-icon>\r\n      <ion-label>Tab 2</ion-label>\r\n    </ion-tab-button>\r\n    <ion-tab-button tab=\"tab3\">\r\n      <ion-icon name=\"map\" (click)=\"updateTitle('Map')\"></ion-icon>\r\n      <ion-label>Map</ion-label>\r\n    </ion-tab-button>\r\n\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>";
     /***/
   },
 
@@ -77,9 +77,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         children: [{
           path: '',
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | tab1-tab1-module */
-            "tab1-tab1-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null,
             /*! ../tab1/tab1.module */
             "./src/app/tab1/tab1.module.ts")).then(function (m) {
               return m.Tab1PageModule;
@@ -91,9 +91,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         children: [{
           path: '',
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | tab2-tab2-module */
-            "tab2-tab2-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("tab2-tab2-module")]).then(__webpack_require__.bind(null,
             /*! ../tab2/tab2.module */
             "./src/app/tab2/tab2.module.ts")).then(function (m) {
               return m.Tab2PageModule;
@@ -105,9 +105,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         children: [{
           path: '',
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | tab3-tab3-module */
-            "tab3-tab3-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("common"), __webpack_require__.e("tab3-tab3-module")]).then(__webpack_require__.bind(null,
             /*! ../tab3/tab3.module */
             "./src/app/tab3/tab3.module.ts")).then(function (m) {
               return m.Tab3PageModule;
@@ -115,13 +115,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }]
       }, {
-        path: '',
-        redirectTo: '/tabs/tab1',
+        path: 'tabs',
+        redirectTo: 'tabs/tab1',
         pathMatch: 'full'
       }]
     }, {
-      path: '',
-      redirectTo: '/tabs/tab1',
+      path: 'tabs',
+      redirectTo: 'tabs/tab1',
       pathMatch: 'full'
     }];
 

@@ -438,7 +438,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-split-pane contentId=\"main\">\n    <!--  our side menu  -->\n    <ion-menu contentId=\"main\">\n        <ion-header>\n          <ion-toolbar translucent>\n            <ion-title>Menu</ion-title>\n          </ion-toolbar>\n          <ion-icon name=\"home\"></ion-icon>\n          <ion-label>{{currentUser}}</ion-label>\n        </ion-header>\n        <ion-content>\n          <ion-list>\n            <ion-item [routerLink]=\"['/']\">\n              <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n              <ion-label>Home</ion-label>\n            </ion-item>\n            <ion-item>\n              <ion-icon name=\"person\" slot=\"start\"></ion-icon>\n              <ion-label>Profile</ion-label>\n            </ion-item>\n            <ion-item [routerLink]=\"['login/']\">\n              <ion-icon name=\"log-out\" slot=\"start\"></ion-icon>\n              <ion-label>Log Out</ion-label>\n            </ion-item>\n            <ion-item>\n              <ion-icon name=\"settings\" slot=\"start\"></ion-icon>\n              <ion-label>Settings</ion-label>\n            </ion-item>\n          </ion-list>\n        </ion-content>\n    </ion-menu>\n  \n    <!-- the main content -->\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-split-pane contentId=\"main\">\r\n    <!--  our side menu  -->\r\n    <ion-menu contentId=\"main\" menu-id=\"sidePanel\" swipe-gesture=true>\r\n      <ion-header>\r\n        <ion-menu-toggle menu=\"sidePanel\">\r\n\r\n          <ion-item lines=\"full\" color=\"dark\" [routerLink]=\"['user']\">\r\n            <ion-avatar slot=\"start\">\r\n              <img src=\"https://ui-avatars.com/api/?name=+{{this.userService.currentUser}}\">\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <h1>{{this.userService.currentUser}}</h1>\r\n              <h3>{{this.userService.currentUserEmail}}</h3>\r\n              <h3></h3>\r\n            </ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-menu-toggle menu=\"sidePanel\">\r\n          <ion-list>\r\n            <ion-item [routerLink]=\"['tabs/tabs/tab1']\" lines=\"full\">\r\n              <ion-icon name=\"home\" slot=\"start\"></ion-icon>\r\n              <ion-label>Home</ion-label>\r\n            </ion-item>\r\n            <ion-item (click)=\"logout()\" lines=\"full\">\r\n              <ion-icon name=\"log-out\" slot=\"start\"></ion-icon>\r\n              <ion-label>Log Out</ion-label>\r\n            </ion-item>\r\n          </ion-list>\r\n        </ion-menu-toggle>\r\n      </ion-content>\r\n    </ion-menu>\r\n\r\n    <!-- the main content -->\r\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n  </ion-split-pane>\r\n</ion-app>");
 
 /***/ }),
 
@@ -702,12 +702,20 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: '',
+        path: 'tabs',
         loadChildren: () => __webpack_require__.e(/*! import() | tabs-tabs-module */ "tabs-tabs-module").then(__webpack_require__.bind(null, /*! ./tabs/tabs.module */ "./src/app/tabs/tabs.module.ts")).then(m => m.TabsPageModule)
     },
     {
-        path: 'login',
+        path: '',
         loadChildren: () => __webpack_require__.e(/*! import() | login-login-module */ "login-login-module").then(__webpack_require__.bind(null, /*! ./login/login.module */ "./src/app/login/login.module.ts")).then(m => m.LoginPageModule)
+    },
+    {
+        path: 'user',
+        loadChildren: () => __webpack_require__.e(/*! import() | user-user-module */ "user-user-module").then(__webpack_require__.bind(null, /*! ./user/user.module */ "./src/app/user/user.module.ts")).then(m => m.UserPageModule)
+    },
+    {
+        path: 'signup',
+        loadChildren: () => __webpack_require__.e(/*! import() | signup-signup-module */ "signup-signup-module").then(__webpack_require__.bind(null, /*! ./signup/signup.module */ "./src/app/signup/signup.module.ts")).then(m => m.SignupPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -754,6 +762,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
@@ -761,18 +771,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar, menu, userService) {
+    constructor(platform, splashScreen, statusBar, menu, userService, router) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.menu = menu;
         this.userService = userService;
+        this.router = router;
         this.initializeApp();
     }
     ngOnInit() {
-        this.userService.getCurrentUser().subscribe(response => {
-            console.log(response);
-        });
     }
     initializeApp() {
         this.platform.ready().then(() => {
@@ -783,13 +791,24 @@ let AppComponent = class AppComponent {
     openMenu() {
         this.menu.open('menu');
     }
+    logout() {
+        this.userService.logout().subscribe(response => {
+            if (response === 'ok') {
+                this.router.navigateByUrl('/');
+                this.userService.getCurrentUser().subscribe(res => {
+                    this.userService.currentUser = res.username;
+                });
+            }
+        });
+    }
 };
 AppComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
-    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -801,7 +820,8 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
         _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"],
-        _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]])
+        _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
 ], AppComponent);
 
 
@@ -937,14 +957,23 @@ __webpack_require__.r(__webpack_exports__);
 let HttpclientService = class HttpclientService {
     constructor(http) {
         this.http = http;
+        this.httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+                'Content-Type': 'application/json',
+            })
+        };
+        this.contentheaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Content-Type', 'application/json');
     }
     dashPost(url, body) {
-        const contentheaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Content-Type', 'application/json');
-        return this.http.post(this.getUrl() + url, body, { headers: contentheaders });
+        return this.http.post(this.getUrl() + url, body, this.httpOptions);
     }
     dashGet(url) {
-        const contentheaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Content-Type', 'application/json');
-        return this.http.get(this.getUrl() + url, { headers: contentheaders });
+        return this.http.get(this.getUrl() + url, this.httpOptions);
+    }
+    mapGet(url) {
+        const headerUrl = 'http://localhost:8000/maps.googleapis.com:443/maps/api/';
+        const apiKey = 'AIzaSyDVz_U6kBNHKduZ_7VsehBiTOoYK5Z-HhM';
+        return this.http.get(headerUrl + url + apiKey, this.httpOptions);
     }
     getUrl() {
         const searchUrl = 'http://localhost:8081/';
@@ -984,16 +1013,57 @@ __webpack_require__.r(__webpack_exports__);
 let UserService = class UserService {
     constructor(http) {
         this.http = http;
+        this.currentUser = 'JarvisIsGay';
+        this.currentUserEmail = 'JarvisIsGay';
+        this.currentUserHome = 'JarvisIsGay';
+        this.currentUserWork = 'JarvisIsGay';
     }
-    login(userName, password_) {
+    login(userName, passw0rd) {
         const body = {
             username: userName,
-            password: password_
+            password: passw0rd
         };
-        return this.http.dashPost('user/login/', '{"username": "user2","password": "123456"}');
+        return this.http.dashPost('user/login/', JSON.stringify(body));
     }
     getCurrentUser() {
         return this.http.dashGet('user/getCurrentUser/');
+    }
+    logout() {
+        return this.http.dashGet('user/logout/');
+    }
+    verifyUsername(userName) {
+        const body = {
+            username: userName
+        };
+        return this.http.dashPost('user/verifyUsername/', JSON.stringify(body));
+    }
+    verifyEmail(Email) {
+        const body = {
+            email: Email
+        };
+        return this.http.dashPost('user/verifyEmail/', JSON.stringify(body));
+    }
+    newUser(userName, passw0rd, Email, HomeAddress, WorkAddress) {
+        const body = {
+            username: userName,
+            password: passw0rd,
+            email: Email,
+            homeAddress: HomeAddress,
+            workAddress: WorkAddress
+        };
+        return this.http.dashPost('user/newUser/', JSON.stringify(body));
+    }
+    changeHomeAddress(HomeAddress) {
+        const body = {
+            homeAddress: HomeAddress
+        };
+        return this.http.dashPost('user/changeAddress?tag=home', JSON.stringify(body));
+    }
+    changeWorkAddress(WorkAddress) {
+        const body = {
+            workAddress: WorkAddress
+        };
+        return this.http.dashPost('user/changeAddress?tag=work', JSON.stringify(body));
     }
 };
 UserService.ctorParameters = () => [

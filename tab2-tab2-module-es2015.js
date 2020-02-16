@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n\r\n\r\n  <div class=\"map\">\r\n    <ion-button class=\"map_button\" color=\"primary\">Maps</ion-button>\r\n  </div>\r\n  <ion-card>\r\n    <ion-card-header>\r\n      <ion-card-subtitle>Grocery items</ion-card-subtitle>\r\n      <ion-card-title>Cheese</ion-card-title>\r\n    </ion-card-header>\r\n  \r\n    <ion-card-content>\r\n      - Cheese $5\r\n    </ion-card-content>\r\n  </ion-card>  \r\n  \r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n<br>\r\n<br>\r\n\r\n\r\n    \r\n  <ion-list ng-cloak>\r\n    <ion-item-sliding *ngFor=\"let item of shoppingList\">\r\n      <ion-item>\r\n        <ion-card>\r\n          <ion-label>{{item.itemName}}</ion-label>\r\n          <ion-label>{{item.store}}</ion-label>\r\n          <ion-checkbox></ion-checkbox>\r\n        </ion-card>\r\n      </ion-item>\r\n    </ion-item-sliding>\r\n\r\n  </ion-list>\r\n\r\n<ion-card>\r\n  <ion-button (click)=\"generateMap()\">\r\n    <ion-icon name=\"logo-buffer\"></ion-icon>\r\n    </ion-button>\r\n</ion-card>\r\n\r\n\r\n \r\n  \r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -80,18 +80,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tab2Page", function() { return Tab2Page; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_search_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/search.service */ "./src/app/services/search.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _tab3_tab3_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tab3/tab3.page */ "./src/app/tab3/tab3.page.ts");
+
+
+
+
 
 
 let Tab2Page = class Tab2Page {
-    constructor() { }
+    constructor(searchService, router) {
+        this.searchService = searchService;
+        this.router = router;
+        this.shoppingList = [];
+    }
+    ngOnInit() {
+        this.shoppingList = this.searchService.shoppingList;
+    }
+    generateMap() {
+        this.shoppingList.forEach(element => {
+            this.searchService.getNearStore(element.store).subscribe(response => {
+                console.log(response);
+                this.searchService.locations.push({ location: response });
+            });
+        });
+        console.log(this.searchService.locations);
+        this.router.navigateByUrl('tabs/tabs/tab3');
+    }
 };
+Tab2Page.ctorParameters = () => [
+    { type: _services_search_service__WEBPACK_IMPORTED_MODULE_2__["SearchService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonReorderGroup"], { static: true }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonReorderGroup"])
+], Tab2Page.prototype, "reorderGroup", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_tab3_tab3_page__WEBPACK_IMPORTED_MODULE_5__["Tab3Page"], { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _tab3_tab3_page__WEBPACK_IMPORTED_MODULE_5__["Tab3Page"])
+], Tab2Page.prototype, "tab3", void 0);
 Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-tab2',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./tab2.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/tab2/tab2.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./tab2.page.scss */ "./src/app/tab2/tab2.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_search_service__WEBPACK_IMPORTED_MODULE_2__["SearchService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
 ], Tab2Page);
 
 

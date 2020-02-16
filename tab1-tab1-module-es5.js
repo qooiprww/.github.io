@@ -1,8 +1,8 @@
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["tab1-tab1-module"], {
   /***/
@@ -21,84 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header [translucent]=\"true\">\r\n  <ion-toolbar>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n\r\n\r\n  <ion-searchbar animated type=\"text\" debounce=\"500\" (ionInput)=\"getItems($event)\"></ion-searchbar>\r\n  <ion-list *ngIf=\"isItemAvailable\">\r\n    <ion-item-sliding *ngFor=\"let item of items\">\r\n      <ion-item>\r\n        <ion-card>\r\n          <ion-label>{{item.itemName}}</ion-label>\r\n            <ion-label>{{item.store}}</ion-label>\r\n\r\n        </ion-card>\r\n      </ion-item>\r\n    </ion-item-sliding>\r\n  </ion-list>\r\n</ion-content>\r\n";
-    /***/
-  },
-
-  /***/
-  "./src/app/services/search.service.ts":
-  /*!********************************************!*\
-    !*** ./src/app/services/search.service.ts ***!
-    \********************************************/
-
-  /*! exports provided: SearchService */
-
-  /***/
-  function srcAppServicesSearchServiceTs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "SearchService", function () {
-      return SearchService;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/fesm2015/core.js");
-    /* harmony import */
-
-
-    var src_app_services_httpclient_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! src/app/services/httpclient.service */
-    "./src/app/services/httpclient.service.ts");
-
-    var SearchService =
-    /*#__PURE__*/
-    function () {
-      function SearchService(http) {
-        _classCallCheck(this, SearchService);
-
-        this.http = http;
-      }
-
-      _createClass(SearchService, [{
-        key: "searchItems",
-        value: function searchItems(value) {
-          var body = {
-            name: value
-          };
-          return this.http.dashPost('search/', JSON.stringify(body));
-        }
-      }, {
-        key: "getAll",
-        value: function getAll() {
-          return this.http.dashGet('getlist/');
-        }
-      }]);
-
-      return SearchService;
-    }();
-
-    SearchService.ctorParameters = function () {
-      return [{
-        type: src_app_services_httpclient_service__WEBPACK_IMPORTED_MODULE_2__["HttpclientService"]
-      }];
-    };
-
-    SearchService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-      providedIn: 'root'
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_httpclient_service__WEBPACK_IMPORTED_MODULE_2__["HttpclientService"]])], SearchService);
+    __webpack_exports__["default"] = "<ion-content [fullscreen]=\"true\">\r\n\r\n\r\n  <ion-list *ngIf=\"isItemAvailable\">\r\n    <ion-item-sliding *ngFor=\"let item of items\">\r\n      <ion-item>\r\n        <ion-card>\r\n          <ion-label>{{item.itemName}}</ion-label>\r\n          <ion-label>{{item.store}}</ion-label>\r\n\r\n        </ion-card>\r\n      </ion-item>\r\n    </ion-item-sliding>\r\n  </ion-list>\r\n</ion-content>";
     /***/
   },
 

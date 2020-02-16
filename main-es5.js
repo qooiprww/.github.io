@@ -166,7 +166,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\n  <ion-split-pane contentId=\"main\">\n    <!--  our side menu  -->\n    <ion-menu contentId=\"main\">\n        <ion-header>\n          <ion-toolbar translucent>\n            <ion-title>Menu</ion-title>\n          </ion-toolbar>\n          <ion-icon name=\"home\"></ion-icon>\n          <ion-label>{{currentUser}}</ion-label>\n        </ion-header>\n        <ion-content>\n          <ion-list>\n            <ion-item [routerLink]=\"['/']\">\n              <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n              <ion-label>Home</ion-label>\n            </ion-item>\n            <ion-item>\n              <ion-icon name=\"person\" slot=\"start\"></ion-icon>\n              <ion-label>Profile</ion-label>\n            </ion-item>\n            <ion-item [routerLink]=\"['login/']\">\n              <ion-icon name=\"log-out\" slot=\"start\"></ion-icon>\n              <ion-label>Log Out</ion-label>\n            </ion-item>\n            <ion-item>\n              <ion-icon name=\"settings\" slot=\"start\"></ion-icon>\n              <ion-label>Settings</ion-label>\n            </ion-item>\n          </ion-list>\n        </ion-content>\n    </ion-menu>\n  \n    <!-- the main content -->\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-split-pane contentId=\"main\">\r\n    <!--  our side menu  -->\r\n    <ion-menu contentId=\"main\" menu-id=\"sidePanel\" swipe-gesture=true>\r\n      <ion-header>\r\n        <ion-menu-toggle menu=\"sidePanel\">\r\n\r\n          <ion-item lines=\"full\" color=\"dark\" [routerLink]=\"['user']\">\r\n            <ion-avatar slot=\"start\">\r\n              <img src=\"https://ui-avatars.com/api/?name=+{{this.userService.currentUser}}\">\r\n            </ion-avatar>\r\n            <ion-label>\r\n              <h1>{{this.userService.currentUser}}</h1>\r\n              <h3>{{this.userService.currentUserEmail}}</h3>\r\n              <h3></h3>\r\n            </ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-menu-toggle menu=\"sidePanel\">\r\n          <ion-list>\r\n            <ion-item [routerLink]=\"['tabs/tabs/tab1']\" lines=\"full\">\r\n              <ion-icon name=\"home\" slot=\"start\"></ion-icon>\r\n              <ion-label>Home</ion-label>\r\n            </ion-item>\r\n            <ion-item (click)=\"logout()\" lines=\"full\">\r\n              <ion-icon name=\"log-out\" slot=\"start\"></ion-icon>\r\n              <ion-label>Log Out</ion-label>\r\n            </ion-item>\r\n          </ion-list>\r\n        </ion-menu-toggle>\r\n      </ion-content>\r\n    </ion-menu>\r\n\r\n    <!-- the main content -->\r\n    <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n  </ion-split-pane>\r\n</ion-app>";
     /***/
   },
 
@@ -787,7 +787,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/@angular/router/fesm2015/router.js");
 
     var routes = [{
-      path: '',
+      path: 'tabs',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | tabs-tabs-module */
@@ -798,7 +798,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
       }
     }, {
-      path: 'login',
+      path: '',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
         /*! import() | login-login-module */
@@ -806,6 +806,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /*! ./login/login.module */
         "./src/app/login/login.module.ts")).then(function (m) {
           return m.LoginPageModule;
+        });
+      }
+    }, {
+      path: 'user',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | user-user-module */
+        "user-user-module").then(__webpack_require__.bind(null,
+        /*! ./user/user.module */
+        "./src/app/user/user.module.ts")).then(function (m) {
+          return m.UserPageModule;
+        });
+      }
+    }, {
+      path: 'signup',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | signup-signup-module */
+        "signup-signup-module").then(__webpack_require__.bind(null,
+        /*! ./signup/signup.module */
+        "./src/app/signup/signup.module.ts")).then(function (m) {
+          return m.SignupPageModule;
         });
       }
     }];
@@ -898,11 +920,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./services/user.service */
     "./src/app/services/user.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
 
     var AppComponent =
     /*#__PURE__*/
     function () {
-      function AppComponent(platform, splashScreen, statusBar, menu, userService) {
+      function AppComponent(platform, splashScreen, statusBar, menu, userService, router) {
         _classCallCheck(this, AppComponent);
 
         this.platform = platform;
@@ -910,16 +938,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.statusBar = statusBar;
         this.menu = menu;
         this.userService = userService;
+        this.router = router;
         this.initializeApp();
       }
 
       _createClass(AppComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {
-          this.userService.getCurrentUser().subscribe(function (response) {
-            console.log(response);
-          });
-        }
+        value: function ngOnInit() {}
       }, {
         key: "initializeApp",
         value: function initializeApp() {
@@ -935,6 +960,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "openMenu",
         value: function openMenu() {
           this.menu.open('menu');
+        }
+      }, {
+        key: "logout",
+        value: function logout() {
+          var _this2 = this;
+
+          this.userService.logout().subscribe(function (response) {
+            if (response === 'ok') {
+              _this2.router.navigateByUrl('/');
+
+              _this2.userService.getCurrentUser().subscribe(function (res) {
+                _this2.userService.currentUser = res.username;
+              });
+            }
+          });
         }
       }]);
 
@@ -952,6 +992,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"]
       }, {
         type: _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]
       }];
     };
 
@@ -963,7 +1005,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./app.component.scss */
       "./src/app/app.component.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"], _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]])], AppComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"], _services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])], AppComponent);
     /***/
   },
 
@@ -1214,23 +1256,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, HttpclientService);
 
         this.http = http;
+        this.httpOptions = {
+          headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+            'Content-Type': 'application/json'
+          })
+        };
+        this.contentheaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Content-Type', 'application/json');
       }
 
       _createClass(HttpclientService, [{
         key: "dashPost",
         value: function dashPost(url, body) {
-          var contentheaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Content-Type', 'application/json');
-          return this.http.post(this.getUrl() + url, body, {
-            headers: contentheaders
-          });
+          return this.http.post(this.getUrl() + url, body, this.httpOptions);
         }
       }, {
         key: "dashGet",
         value: function dashGet(url) {
-          var contentheaders = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().set('Content-Type', 'application/json');
-          return this.http.get(this.getUrl() + url, {
-            headers: contentheaders
-          });
+          return this.http.get(this.getUrl() + url, this.httpOptions);
+        }
+      }, {
+        key: "mapGet",
+        value: function mapGet(url) {
+          var headerUrl = 'http://localhost:8000/maps.googleapis.com:443/maps/api/';
+          var apiKey = 'AIzaSyDVz_U6kBNHKduZ_7VsehBiTOoYK5Z-HhM';
+          return this.http.get(headerUrl + url + apiKey, this.httpOptions);
         }
       }, {
         key: "getUrl",
@@ -1300,21 +1349,74 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, UserService);
 
         this.http = http;
+        this.currentUser = 'JarvisIsGay';
+        this.currentUserEmail = 'JarvisIsGay';
+        this.currentUserHome = 'JarvisIsGay';
+        this.currentUserWork = 'JarvisIsGay';
       }
 
       _createClass(UserService, [{
         key: "login",
-        value: function login(userName, password_) {
+        value: function login(userName, passw0rd) {
           var body = {
             username: userName,
-            password: password_
+            password: passw0rd
           };
-          return this.http.dashPost('user/login/', '{"username": "user2","password": "123456"}');
+          return this.http.dashPost('user/login/', JSON.stringify(body));
         }
       }, {
         key: "getCurrentUser",
         value: function getCurrentUser() {
           return this.http.dashGet('user/getCurrentUser/');
+        }
+      }, {
+        key: "logout",
+        value: function logout() {
+          return this.http.dashGet('user/logout/');
+        }
+      }, {
+        key: "verifyUsername",
+        value: function verifyUsername(userName) {
+          var body = {
+            username: userName
+          };
+          return this.http.dashPost('user/verifyUsername/', JSON.stringify(body));
+        }
+      }, {
+        key: "verifyEmail",
+        value: function verifyEmail(Email) {
+          var body = {
+            email: Email
+          };
+          return this.http.dashPost('user/verifyEmail/', JSON.stringify(body));
+        }
+      }, {
+        key: "newUser",
+        value: function newUser(userName, passw0rd, Email, HomeAddress, WorkAddress) {
+          var body = {
+            username: userName,
+            password: passw0rd,
+            email: Email,
+            homeAddress: HomeAddress,
+            workAddress: WorkAddress
+          };
+          return this.http.dashPost('user/newUser/', JSON.stringify(body));
+        }
+      }, {
+        key: "changeHomeAddress",
+        value: function changeHomeAddress(HomeAddress) {
+          var body = {
+            homeAddress: HomeAddress
+          };
+          return this.http.dashPost('user/changeAddress?tag=home', JSON.stringify(body));
+        }
+      }, {
+        key: "changeWorkAddress",
+        value: function changeWorkAddress(WorkAddress) {
+          var body = {
+            workAddress: WorkAddress
+          };
+          return this.http.dashPost('user/changeAddress?tag=work', JSON.stringify(body));
         }
       }]);
 

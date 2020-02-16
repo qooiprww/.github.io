@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>login</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-input  color=\"primary\" placeholder=\"Username\" [(ngModel)]=\"username\"></ion-input>\r\n  <ion-input type=\"password\" color=\"primary\" placeholder=\"Password\"[(ngModel)]=\"password\"></ion-input>\r\n  <ion-button class=\"login\" expand=\"block\" (click)=\"login()\">login</ion-button>\r\n  <ion-progress-bar type=\"indeterminate\" *ngIf=\"isLogined\"></ion-progress-bar>\r\n</ion-content>";
+    __webpack_exports__["default"] = "<ion-content color=\"light\">\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col class=\"align-self-stretch\">\r\n\r\n        <ion-item lines=\"none\" color=\"light\">\r\n          <img src=\"/assets/icon/shopresso.png\">\r\n        </ion-item>\r\n      </ion-col>\r\n\r\n    </ion-row>\r\n\r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-label position=\"stacked\">\r\n          <h2>Username</h2>\r\n        </ion-label>\r\n        <ion-input color=\"dark\" autofocus=true clear-input=true placeholder=\"Username\" [(ngModel)]=\"username\">\r\n        </ion-input>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-label position=\"stacked\">\r\n          <h2>Password</h2>\r\n        </ion-label>\r\n        <ion-input type=\"password\" clear-input=true color=\"dark\" placeholder=\"Password\" [(ngModel)]=\"password\">\r\n        </ion-input>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n\r\n      <ion-col>\r\n        <ion-button color=\"dark\" class=\"login\" size=\"large\" expand=\"block\" [routerLink]=\"['/signup']\">Sign Up\r\n        </ion-button>\r\n      </ion-col>\r\n      <ion-col>\r\n        <ion-button color=\"dark\" class=\"login\" size=\"large\" expand=\"block\" (click)=\"login()\">Login</ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n\r\n\r\n\r\n\r\n  </ion-grid>\r\n\r\n</ion-content>";
     /***/
   },
 
@@ -174,7 +174,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "ion-content ion-toolbar {\n  --background: translucent;\n}\n\n.User_id {\n  text-align: center;\n  font-size: xx-large;\n}\n\n.password {\n  text-align: center;\n  font-size: xx-large;\n}\n\n.login {\n  text-align: center;\n  font-size: large;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvZ2luL0M6XFxVc2Vyc1xcV3VIYW9cXE9uZURyaXZlXFzmlofmoaNcXEdpdEh1YlxcU2hvcHByZXNzb1xcZnJvbnRlbmRcXHNyY1xcYXBwL2xvZ2luXFxsb2dpbi5wYWdlLnNjc3MiLCJsb2dpbi9sb2dpbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSx5QkFBQTtBQ0NKOztBREVBO0VBQ0ksa0JBQUE7RUFDQSxtQkFBQTtBQ0NKOztBREdBO0VBQ0ksa0JBQUE7RUFDQSxtQkFBQTtBQ0FKOztBRElBO0VBQ0ksa0JBQUE7RUFDQSxnQkFBQTtBQ0RKIiwiZmlsZSI6ImxvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50IGlvbi10b29sYmFyIHtcclxuICAgIC0tYmFja2dyb3VuZDogdHJhbnNsdWNlbnQ7XHJcbiAgfVxyXG5cclxuLlVzZXJfaWQge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgZm9udC1zaXplOiB4eC1sYXJnZTtcclxuICAgIFxyXG59XHJcblxyXG4ucGFzc3dvcmQge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgZm9udC1zaXplOiB4eC1sYXJnZTtcclxuICAgIFxyXG59XHJcblxyXG4ubG9naW57XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBmb250LXNpemU6IGxhcmdlO1xyXG4gICAgXHJcbn1cclxuXHJcbiIsImlvbi1jb250ZW50IGlvbi10b29sYmFyIHtcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc2x1Y2VudDtcbn1cblxuLlVzZXJfaWQge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGZvbnQtc2l6ZTogeHgtbGFyZ2U7XG59XG5cbi5wYXNzd29yZCB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1zaXplOiB4eC1sYXJnZTtcbn1cblxuLmxvZ2luIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LXNpemU6IGxhcmdlO1xufSJdfQ== */";
+    __webpack_exports__["default"] = "ion-content ion-toolbar {\n  --background: translucent;\n}\n\nion-item {\n  --min-height:400px;\n}\n\nion-input {\n  --background: lightgrey ;\n}\n\nion-thumbnail {\n  --min-height:400px;\n}\n\n.User_id {\n  text-align: center;\n  font-size: xx-large;\n}\n\n.password {\n  text-align: center;\n  font-size: xx-large;\n}\n\n.login {\n  text-align: center;\n  font-size: large;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvZ2luL0M6XFxVc2Vyc1xcV3VIYW9cXE9uZURyaXZlXFzmlofmoaNcXEdpdEh1YlxcU2hvcHByZXNzb1xcZnJvbnRlbmRcXHNyY1xcYXBwL2xvZ2luXFxsb2dpbi5wYWdlLnNjc3MiLCJsb2dpbi9sb2dpbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSx5QkFBQTtBQ0NKOztBREVFO0VBQ0Usa0JBQUE7QUNDSjs7QURDRTtFQUNJLHdCQUFBO0FDRU47O0FEQUU7RUFDRSxrQkFBQTtBQ0dKOztBREFBO0VBQ0ksa0JBQUE7RUFDQSxtQkFBQTtBQ0dKOztBRENBO0VBQ0ksa0JBQUE7RUFDQSxtQkFBQTtBQ0VKOztBREVBO0VBQ0ksa0JBQUE7RUFDQSxnQkFBQTtBQ0NKIiwiZmlsZSI6ImxvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50IGlvbi10b29sYmFyIHtcclxuICAgIC0tYmFja2dyb3VuZDogdHJhbnNsdWNlbnQ7XHJcbiAgfVxyXG5cclxuICBpb24taXRlbXtcclxuICAgIC0tbWluLWhlaWdodDo0MDBweDtcclxuICB9XHJcbiAgaW9uLWlucHV0e1xyXG4gICAgICAtLWJhY2tncm91bmQ6IGxpZ2h0Z3JleSAgICA7XHJcbiAgfVxyXG4gIGlvbi10aHVtYm5haWx7XHJcbiAgICAtLW1pbi1oZWlnaHQ6NDAwcHg7XHJcbiAgfVxyXG5cclxuLlVzZXJfaWQge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgZm9udC1zaXplOiB4eC1sYXJnZTtcclxuICAgIFxyXG59XHJcblxyXG4ucGFzc3dvcmQge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgZm9udC1zaXplOiB4eC1sYXJnZTtcclxuICAgIFxyXG59XHJcblxyXG4ubG9naW57XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBmb250LXNpemU6IGxhcmdlO1xyXG4gICAgXHJcbn1cclxuXHJcbiIsImlvbi1jb250ZW50IGlvbi10b29sYmFyIHtcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc2x1Y2VudDtcbn1cblxuaW9uLWl0ZW0ge1xuICAtLW1pbi1oZWlnaHQ6NDAwcHg7XG59XG5cbmlvbi1pbnB1dCB7XG4gIC0tYmFja2dyb3VuZDogbGlnaHRncmV5IDtcbn1cblxuaW9uLXRodW1ibmFpbCB7XG4gIC0tbWluLWhlaWdodDo0MDBweDtcbn1cblxuLlVzZXJfaWQge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGZvbnQtc2l6ZTogeHgtbGFyZ2U7XG59XG5cbi5wYXNzd29yZCB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1zaXplOiB4eC1sYXJnZTtcbn1cblxuLmxvZ2luIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LXNpemU6IGxhcmdlO1xufSJdfQ== */";
     /***/
   },
 
@@ -230,9 +230,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.userService = userService;
         this.router = router;
-        this.isLogined = false;
-        this.username = 'user2';
-        this.password = '123456';
       }
 
       _createClass(LoginPage, [{
@@ -243,14 +240,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function login() {
           var _this = this;
 
-          this.isLogined = true;
           this.userService.login(this.username, this.password).subscribe(function (response) {
-            console.log(response);
-
             if (response === 'Login Succeed') {
-              _this.isLogined = false;
+              _this.router.navigateByUrl('tabs/tabs/tab1');
 
-              _this.router.navigateByUrl('');
+              _this.userService.getCurrentUser().subscribe(function (res) {
+                _this.userService.currentUser = res.username;
+                _this.userService.currentUserEmail = res.email;
+                _this.userService.currentUserHome = res.address[0].address;
+                _this.userService.currentUserWork = res.address[1].address;
+              });
             }
           });
         }
